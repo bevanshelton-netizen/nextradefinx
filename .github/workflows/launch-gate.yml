@@ -24,5 +24,5 @@ jobs:
         run: npm run build
       - name: Verify launch status contract
         run: |
-          grep -q '"liveExecution": false' app/api/status/route.ts
+          grep -q 'liveExecution: false' app/api/status/route.ts
           grep -q 'simulation: true' app/api/status/route.ts
