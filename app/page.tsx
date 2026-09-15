@@ -42,7 +42,7 @@ const lessons = [
 export default function Home() {
   const [locale,setLocale] = useState("en");
   const [query,setQuery] = useState("");
-  const [answer,setAnswer] = useState("Ask NexAI a market question. This launch version keeps all prices and orders in simulation mode until approved live feeds and broker connections are configured.");
+  const [answer,setAnswer] = useState("Ask NexAI a market question in your language. Live market prices are displayed on the Live Markets screen; real-money execution remains locked until approved broker connections are configured.");\n  const [asking,setAsking] = useState(false);
   const [cash,setCash] = useState(100000);
   const [position,setPosition] = useState(0);
   const [tab,setTab] = useState<"learn"|"practice"|"risk"|"connect">("learn");
@@ -51,12 +51,27 @@ export default function Home() {
   const headline = hero[locale] ?? hero.en;
   const equity = useMemo(()=>cash + position * 100, [cash,position]);
 
-  function ask(e:FormEvent) {
+  async function ask(e:FormEvent) {
     e.preventDefault();
     const q=query.trim();
-    if(!q) return;
-    setAnswer("NexAI launch mode: I can explain concepts, compare market structures, help you build a checklist and analyse scenarios. Live prices are not connected yet, so I will not present simulated figures as real market data. Your question: “"+q+"”");
-    setQuery("");
+    if(!q || asking) return;
+    setAsking(true);
+    setAnswer("NexAI is thinking…");
+    try {
+      const response = await fetch("/api/ai", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ question: q, locale })
+      });
+      const data = await response.json();
+      if(!response.ok) throw new Error(data?.error || "NexAI request failed");
+      setAnswer(data.text);
+      setQuery("");
+    } catch (error) {
+      setAnswer(error instanceof Error ? error.message : "NexAI is temporarily unavailable.");
+    } finally {
+      setAsking(false);
+    }
   }
 
   function paperBuy() {
@@ -89,7 +104,7 @@ export default function Home() {
         <div className="answer">{answer}</div>
         <form onSubmit={ask} className="ask">
           <input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Ask about a company, currency, market, risk or trading concept…" />
-          <button>Ask NexAI</button>
+          <button disabled={asking || !query.trim()}>{asking?"Thinking…":"Ask NexAI"}</button>
         </form>
         <p className="fine">No profit guarantees. No simulated price is labelled live. AI explanations are educational until licensed execution services are activated.</p>
       </section>
