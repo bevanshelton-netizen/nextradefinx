@@ -42,7 +42,8 @@ const lessons = [
 export default function Home() {
   const [locale,setLocale] = useState("en");
   const [query,setQuery] = useState("");
-  const [answer,setAnswer] = useState("Ask NexAI a market question in your language. Live market prices are displayed on the Live Markets screen; real-money execution remains locked until approved broker connections are configured.");\n  const [asking,setAsking] = useState(false);
+  const [answer,setAnswer] = useState("Ask NexAI a market question in your language. Live market prices are displayed on the Live Markets screen; real-money execution remains locked until approved broker connections are configured.");
+  const [asking,setAsking] = useState(false);
   const [cash,setCash] = useState(100000);
   const [position,setPosition] = useState(0);
   const [tab,setTab] = useState<"learn"|"practice"|"risk"|"connect">("learn");
