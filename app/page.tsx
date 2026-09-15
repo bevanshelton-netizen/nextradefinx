@@ -71,7 +71,7 @@ export default function Home() {
     <main dir={rtl?"rtl":"ltr"}>
       <header className="topbar">
         <div className="brand"><span className="mark">N</span><div><strong>NexAI</strong><small>GLOBAL MARKETS</small></div></div>
-        <nav><a href="#ai">Ask AI</a><a href="#markets">Markets</a><a href="#academy">Academy</a></nav>
+        <nav><a href="#ai">Ask AI</a><a href="/markets/live">Live Markets</a><a href="#academy">Academy</a></nav>
         <select aria-label="Language" value={locale} onChange={e=>setLocale(e.target.value)}>
           {languages.map(([code,name])=><option key={code} value={code}>{name}</option>)}
         </select>
@@ -95,7 +95,7 @@ export default function Home() {
       </section>
 
       <section id="markets">
-        <div className="sectionTitle"><small>MARKET ACCESS MAP</small><h2>One intelligence layer. Many exchanges.</h2></div>
+        <div className="sectionTitle"><small>MARKET ACCESS MAP</small><h2>One intelligence layer. Many exchanges.</h2><a className="goldLink" href="/markets/live">Open LIVE MARKETS →</a></div>
         <div className="grid markets">
           {markets.map(([name,region,status])=><article className="marketCard" key={name}><span className="pulse"/><h3>{name}</h3><p>{region}</p><b>{status}ULATION READY</b></article>)}
         </div>
