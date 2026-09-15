@@ -2,7 +2,7 @@ name: NexAI Launch Gate
 
 on:
   push:
-    branches: [main, build/nexai-global-ui]
+    branches: [main, build/nexai-global-ui, build/nexai-real-ai]
   pull_request:
     branches: [main]
 
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
       - name: Install
         run: npm install --no-audit --no-fund
       - name: Production build
@@ -26,3 +26,4 @@ jobs:
         run: |
           grep -q 'liveExecution: false' app/api/status/route.ts
           grep -q 'simulation: true' app/api/status/route.ts
+          grep -q 'generateText' app/api/ai/route.ts
