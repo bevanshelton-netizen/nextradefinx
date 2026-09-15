@@ -1,0 +1,30 @@
+name: NexAI Launch Gate
+
+on:
+  push:
+    branches: [main, build/nexai-global-ui]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package.json
+      - name: Install
+        run: npm install --no-audit --no-fund
+      - name: Production build
+        run: npm run build
+      - name: Verify launch status contract
+        run: |
+          grep -q '"liveExecution": false' app/api/status/route.ts
+          grep -q 'simulation: true' app/api/status/route.ts
