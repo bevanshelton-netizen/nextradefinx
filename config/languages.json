@@ -1,0 +1,53 @@
+{
+  "product": "NexAI Global Markets",
+  "defaultLocale": "en",
+  "strategy": "global-majority-plus-africa-first",
+  "tier1_global": [
+    {"code":"en","name":"English","rtl":false},
+    {"code":"zh-CN","name":"Mandarin Chinese","rtl":false},
+    {"code":"hi","name":"Hindi","rtl":false},
+    {"code":"es","name":"Spanish","rtl":false},
+    {"code":"ar","name":"Arabic","rtl":true},
+    {"code":"fr","name":"French","rtl":false},
+    {"code":"bn","name":"Bengali","rtl":false},
+    {"code":"pt","name":"Portuguese","rtl":false},
+    {"code":"ru","name":"Russian","rtl":false},
+    {"code":"ur","name":"Urdu","rtl":true},
+    {"code":"id","name":"Indonesian","rtl":false},
+    {"code":"de","name":"German","rtl":false},
+    {"code":"ja","name":"Japanese","rtl":false},
+    {"code":"ko","name":"Korean","rtl":false},
+    {"code":"tr","name":"Turkish","rtl":false}
+  ],
+  "tier1_africa": [
+    {"code":"sw","name":"Swahili","rtl":false},
+    {"code":"ha","name":"Hausa","rtl":false},
+    {"code":"pcm","name":"Nigerian Pidgin","rtl":false},
+    {"code":"am","name":"Amharic","rtl":false},
+    {"code":"yo","name":"Yoruba","rtl":false},
+    {"code":"ig","name":"Igbo","rtl":false},
+    {"code":"zu","name":"isiZulu","rtl":false},
+    {"code":"xh","name":"isiXhosa","rtl":false},
+    {"code":"af","name":"Afrikaans","rtl":false}
+  ],
+  "south_africa_expansion": [
+    {"code":"nso","name":"Sepedi","rtl":false},
+    {"code":"st","name":"Sesotho","rtl":false},
+    {"code":"tn","name":"Setswana","rtl":false},
+    {"code":"ss","name":"siSwati","rtl":false},
+    {"code":"ve","name":"Tshivenda","rtl":false},
+    {"code":"ts","name":"Xitsonga","rtl":false},
+    {"code":"nr","name":"isiNdebele","rtl":false}
+  ],
+  "requirements": {
+    "ui_translation": true,
+    "ai_chat": true,
+    "financial_glossary": true,
+    "voice_input": true,
+    "voice_output": true,
+    "locale_currency": true,
+    "locale_market_hours": true,
+    "jurisdiction_disclosures": true,
+    "rtl_support": true
+  }
+}
