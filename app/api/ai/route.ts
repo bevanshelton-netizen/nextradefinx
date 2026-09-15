@@ -56,9 +56,25 @@ Do not claim an order has been placed. Real-money execution is disabled in NexTr
     return Response.json({ text, model: "openai/gpt-5.4" });
   } catch (error) {
     console.error("NexAI generation failed", error);
+    const message = error instanceof Error ? error.message : "";
+    const activationRequired =
+      message.includes("valid credit card") ||
+      message.toLowerCase().includes("gateway") && message.toLowerCase().includes("credit");
+
     return Response.json(
-      { error: "NexAI is temporarily unavailable. The learning, live-markets and paper-trading screens remain available." },
-      { status: 503 }
+      {
+        code: activationRequired ? "AI_ACTIVATION_REQUIRED" : "AI_TEMPORARILY_UNAVAILABLE",
+        error: activationRequired
+          ? "NexAI answers are being activated. Live Markets, NexLearn, Practice Trade and NexRisk remain available."
+          : "NexAI is temporarily unavailable. Live Markets, NexLearn, Practice Trade and NexRisk remain available."
+      },
+      {
+        status: 503,
+        headers: {
+          "Cache-Control": "no-store",
+          "Retry-After": activationRequired ? "3600" : "60"
+        }
+      }
     );
   }
 }
