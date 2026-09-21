@@ -87,7 +87,7 @@ export default function Home() {
     <main dir={rtl?"rtl":"ltr"}>
       <header className="topbar">
         <div className="brand"><span className="mark">N</span><div><strong>NexAI</strong><small>GLOBAL MARKETS</small></div></div>
-        <nav><a href="#ai">Ask AI</a><a href="/markets/live">Live Markets</a><a href="#academy">Academy</a></nav>
+        <nav><a href="#ai">Ask AI</a><a href="/markets/live">Live Markets</a><a href="#academy">Academy</a><a href="/academy/seasoned-campaigners">Seasoned Campaigners</a></nav>
         <select aria-label="Language" value={locale} onChange={e=>setLocale(e.target.value)}>
           {languages.map(([code,name])=><option key={code} value={code}>{name}</option>)}
         </select>
@@ -115,6 +115,11 @@ export default function Home() {
         <div className="grid markets">
           {markets.map(([name,region,status])=><article className="marketCard" key={name}><span className="pulse"/><h3>{name}</h3><p>{region}</p><b>{status}ULATION READY</b></article>)}
         </div>
+      </section>
+
+      <section className="campaignerTeaser">
+        <div><small>INSIDE THE CAMPAIGN</small><h2>See how seasoned traders structure the whole decision.</h2><p>Study thesis, risk budget, invalidation, scaling, exits and post-trade review across four veteran operating styles.</p></div>
+        <a href="/academy/seasoned-campaigners">Open Seasoned Campaigners →</a>
       </section>
 
       <section id="academy" className="workspace">
