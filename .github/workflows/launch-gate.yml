@@ -27,3 +27,41 @@ jobs:
           grep -q 'liveExecution: false' app/api/status/route.ts
           grep -q 'simulation: true' app/api/status/route.ts
           grep -q 'generateText' app/api/ai/route.ts
+
+  deploy-owned:
+    name: Deploy to IZAKHONO owned runtime
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: self-hosted
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Prepare owned deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          DEPLOY_ROOT="${NEXTRADE_DEPLOY_ROOT:-$HOME/izakhono-runtime/nextradefinx}"
+          PORT="${NEXTRADE_PORT:-3000}"
+          mkdir -p "$DEPLOY_ROOT"
+          rsync -a --delete --exclude='.git' --exclude='node_modules' ./ "$DEPLOY_ROOT/"
+          cd "$DEPLOY_ROOT"
+          npm install --no-audit --no-fund
+          npm run build
+          if [ -f .nextrade.pid ]; then
+            OLD_PID="$(cat .nextrade.pid || true)"
+            if [ -n "$OLD_PID" ] && kill -0 "$OLD_PID" 2>/dev/null; then
+              kill "$OLD_PID" || true
+              sleep 2
+            fi
+          fi
+          nohup env NODE_ENV=production PORT="$PORT" npm start -- -p "$PORT" > nextrade.log 2>&1 &
+          echo $! > .nextrade.pid
+          sleep 5
+          curl --fail --silent --show-error "http://127.0.0.1:${PORT}/api/status" > /tmp/nextrade-status.json
+          cat /tmp/nextrade-status.json
+          grep -q '"webApp":"live"' /tmp/nextrade-status.json
+          grep -q '"simulation":true' /tmp/nextrade-status.json
+          echo "NexTradeFinX owned runtime is healthy on localhost:${PORT}"
