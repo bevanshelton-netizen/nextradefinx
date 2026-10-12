@@ -13,7 +13,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -28,23 +28,34 @@ jobs:
           grep -q 'liveExecution: false' app/api/status/route.ts
           grep -q 'simulation: true' app/api/status/route.ts
           grep -q 'generateText' app/api/ai/route.ts
-
-  deploy-owned:
-    name: Deploy to IZAKHONO owned runtime
-    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
-    needs: build
-    runs-on: self-hosted
-    timeout-minutes: 20
-    concurrency:
-      group: nextradefinx-owned-production
-      cancel-in-progress: true
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-      - name: Deploy and verify owned runtime
+      - name: Create IZAKHONO owned release manifest
         shell: bash
         run: |
-          chmod +x ops/nextradefinx-owned-deploy.sh
-          ./ops/nextradefinx-owned-deploy.sh
+          mkdir -p release
+          cat > release/izakhono-release.json <<EOF
+          {
+            "schema": "izakhono.release/v1",
+            "product": "NexTradeFinX",
+            "target": "IZAKHONO NODE",
+            "source": "IZAKHONO CODE",
+            "deployment": "IZAKHONO BUILDER -> IZAKHONO NODE / CONTROL",
+            "revision": "${GITHUB_SHA}",
+            "branch": "${GITHUB_REF_NAME}",
+            "status": "deploy_ready",
+            "public_live": false,
+            "health": "/api/status",
+            "simulation": true,
+            "live_execution": false,
+            "created_at": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          EOF
+      - name: Package owned release
+        run: tar -czf nextradefinx-owned-release.tar.gz --exclude=.git --exclude=node_modules --exclude=.next .
+      - name: Upload owned release
+        uses: actions/upload-artifact@v4
+        with:
+          name: nextradefinx-owned-release-${{ github.sha }}
+          path: |
+            nextradefinx-owned-release.tar.gz
+            release/izakhono-release.json
+          retention-days: 30
