@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./dashboard.css";
 import ShareButton from "./share-button";
 import LearnerDriverPromo from "./learner-driver-promo";
 
