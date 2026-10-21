@@ -63,6 +63,7 @@ export function validateStrategy(
   candles: Candle[],
   config: BotConfig = DEFAULT_CONFIG,
   startingEquity = config.startingEquity,
+  symbol = 'VALIDATION',
 ): ValidationResult {
   if (candles.length < Math.max(config.slowEma, config.atrPeriod) + 2) {
     throw new Error('Not enough candles for validation.');
@@ -74,7 +75,8 @@ export function validateStrategy(
   let maxDrawdownAmount = 0;
   let maxDrawdownPct = 0;
   let dailyStartEquity = startingEquity;
-  let dailyKillSwitchTriggered = false;
+  let dailyKillSwitchActive = false;
+  let dailyKillSwitchEverTriggered = false;
   let position: Omit<ValidationTrade, 'exit' | 'pnl' | 'reason' | 'closedAt'> | null = null;
   const trades: ValidationTrade[] = [];
   let currentDay = new Date(candles[0].time * 1000).toISOString().slice(0, 10);
@@ -92,7 +94,7 @@ export function validateStrategy(
     if (day !== currentDay) {
       currentDay = day;
       dailyStartEquity = equity;
-      dailyKillSwitchTriggered = false;
+      dailyKillSwitchActive = false;
     }
 
     if (position) {
@@ -109,10 +111,11 @@ export function validateStrategy(
       }
     }
 
-    if (!position && !dailyKillSwitchTriggered) {
+    if (!position && !dailyKillSwitchActive) {
       const dailyLossPct = dailyStartEquity > 0 ? ((dailyStartEquity - equity) / dailyStartEquity) * 100 : 100;
       if (dailyLossPct >= config.maxDailyLossPct) {
-        dailyKillSwitchTriggered = true;
+        dailyKillSwitchActive = true;
+        dailyKillSwitchEverTriggered = true;
       } else {
         const signal = nextSignal(candles.slice(0, i + 1), equity, equity - dailyStartEquity, 0, config);
         if (signal.side !== 'FLAT') {
@@ -146,7 +149,7 @@ export function validateStrategy(
   const profitFactor = grossLoss === 0 ? (grossProfit > 0 ? Number.POSITIVE_INFINITY : 0) : grossProfit / grossLoss;
 
   return {
-    symbol: 'VALIDATION',
+    symbol,
     bars: candles.length,
     config,
     trades,
@@ -165,11 +168,12 @@ export function validateStrategy(
       expectancyPerTrade: trades.length ? netPnl / trades.length : 0,
       maxDrawdownPct,
       maxDrawdownAmount,
-      dailyKillSwitchTriggered,
+      dailyKillSwitchTriggered: dailyKillSwitchEverTriggered,
       notes: [
         'Historical simulation only; no live orders are submitted.',
         'OHLC ambiguity is resolved conservatively: when stop and target are both touched in one candle, stop is assumed first.',
         'Results can be affected by spread, slippage, fees, liquidity and data quality; those must be modelled before any live consideration.',
+        'Signal generation uses only candles available through the current bar; no future bars are supplied to the strategy.',
       ],
     },
   };
