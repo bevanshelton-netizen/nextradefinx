@@ -26,7 +26,7 @@ export function validateOutOfSample(
 
   const splitIndex = Math.floor(candles.length * inSampleFraction);
   const inSample = validateStrategy(candles.slice(0, splitIndex), config, startingEquity);
-  const outOfSample = validateStrategy(candles.slice(splitIndex), symbol, config, startingEquity);
+  const outOfSample = validateStrategy(candles.slice(splitIndex), config, startingEquity);
 
   return {
     inSample: { ...inSample, symbol },
