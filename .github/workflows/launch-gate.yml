@@ -2,7 +2,7 @@ name: NexAI Launch Gate
 
 on:
   push:
-    branches: [main, build/nexai-global-ui, build/nexai-real-ai]
+    branches: [main, build/izakhono-global-ui, build/nexai-global-ui, build/nexai-real-ai, build/izakhono-invest-mvp]
   pull_request:
     branches: [main]
   workflow_dispatch:
