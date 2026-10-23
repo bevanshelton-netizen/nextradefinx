@@ -50,7 +50,7 @@ jobs:
           }
           EOF
       - name: Package owned release
-        run: tar -czf nextradefinx-owned-release.tar.gz --exclude=.git --exclude=node_modules --exclude=.next .
+        run: tar -czf nextradefinx-owned-release.tar.gz --exclude=.git --exclude=node_modules --exclude=.next --exclude=release --exclude=nextradefinx-owned-release.tar.gz .
       - name: Upload owned release
         uses: actions/upload-artifact@v4
         with:
