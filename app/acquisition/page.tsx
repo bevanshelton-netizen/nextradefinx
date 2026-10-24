@@ -5,75 +5,69 @@ const prospects = [
   { company: "BuildSouth Contractors", segment: "Corporate Apparel", score: 82, need: "Branded site clothing", next: "Qualify decision maker" },
 ];
 
+const industries = [
+  ["Schools & Education", "Uniforms · ECD · Training", "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=85"],
+  ["Mining & Construction", "PPE · Workwear · Safety", "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=85"],
+  ["Corporate & Government", "Branded Apparel · Procurement", "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=85"],
+  ["Sports Clubs & Teams", "Kits · Tracksuits · Gear", "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=900&q=85"],
+  ["Hospitality & Retail", "Staff Uniforms · Branded Wear", "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=85"],
+  ["Furniture & Interior", "Office · Hospitality · Institutions", "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=85"],
+];
+
+const workflow = [
+  ["01", "Research", "Understand your market, ideal customers and buying signals."],
+  ["02", "Find Companies", "Discover businesses that match your products or services."],
+  ["03", "Find Decision Makers", "Identify the right business contacts and roles."],
+  ["04", "Prepare Outreach", "AI prepares relevant, personalised messages for review."],
+  ["05", "Your Approval", "You stay in control before anything is sent externally."],
+  ["06", "Book Meetings", "Move qualified opportunities into your calendar."],
+  ["07", "Follow Up & Convert", "Track opportunities and turn conversations into revenue."],
+];
+
 export default function AcquisitionPage() {
   return (
-    <main style={{ minHeight: "100vh", background: "#07090d", color: "#f5f7fa", padding: "40px 24px", fontFamily: "Arial, sans-serif" }}>
-      <div style={{ maxWidth: 1180, margin: "0 auto" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 20, alignItems: "flex-start", flexWrap: "wrap" }}>
-          <div>
-            <div style={{ color: "#35e0b5", fontWeight: 700, letterSpacing: 2, fontSize: 13 }}>IZAKHONO ONE</div>
-            <h1 style={{ fontSize: 42, margin: "10px 0 8px" }}>AI Client Acquisition Engine</h1>
-            <p style={{ color: "#9da6b5", maxWidth: 720, lineHeight: 1.6, margin: 0 }}>
-              Research markets, identify qualified prospects, prepare personalised outreach and move opportunities toward meetings and revenue — with a human approval gate before external outreach.
-            </p>
-          </div>
-          <div style={{ border: "1px solid #26303d", borderRadius: 14, padding: "12px 16px", background: "#0d1118" }}>
-            <div style={{ fontSize: 11, color: "#7f8998" }}>ENGINE STATUS</div>
-            <strong style={{ color: "#35e0b5" }}>SIMULATION / PREVIEW</strong>
-          </div>
+    <main className="acqSite">
+      <header className="acqNav">
+        <a href="/acquisition" className="acqBrand"><span className="acqLogo">◎</span><span><b>IZAKHONO <em>ONE</em></b><small>PEOPLE · BUSINESS · OPPORTUNITY · GROWTH</small></span></a>
+        <nav><a href="#solutions">Solutions</a><a href="#industries">Industries</a><a href="#workflow">How It Works</a><a href="#opportunities">Opportunities</a></nav>
+        <div className="navActions"><a href="#opportunities" className="navGhost">View Opportunities</a><a href="#start" className="navCta">Get Started</a></div>
+      </header>
+
+      <section className="acqHero" id="start">
+        <div className="heroImage"><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=90" alt="African business team collaborating"/><div className="imageGlow"/><div className="heroBadge">● AI CLIENT ACQUISITION ENGINE</div></div>
+        <div className="heroContent">
+          <p className="kicker">FIND CUSTOMERS · GROW YOUR BUSINESS</p>
+          <h1>Find customers.<br/><span>Grow your business.</span><br/>Focus on what you do best.</h1>
+          <p className="heroLead">IZAKHONO ONE uses AI-powered research to find, qualify and organise real business opportunities around what you sell — 24/7.</p>
+          <div className="heroButtons"><a href="#opportunities" className="bigCta">Start Finding Clients <b>→</b></a><a href="#workflow" className="playCta">▶ See How It Works</a></div>
+          <div className="heroProof"><span>✓ AI-powered research</span><span>✓ Qualified opportunities</span><span>✓ Human approval control</span><span>✓ Built for Africa · Ready for the world</span></div>
         </div>
+      </section>
 
-        <section style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))", gap: 14, margin: "34px 0" }}>
-          {[
-            ["148", "Companies researched"],
-            ["42", "Qualified prospects"],
-            ["18", "Decision makers found"],
-            ["11", "Outreach drafts ready"],
-            ["R2.4m", "Pipeline opportunity"],
-          ].map(([value, label]) => (
-            <div key={label} style={{ border: "1px solid #222a35", borderRadius: 14, padding: 18, background: "#0d1118" }}>
-              <div style={{ fontSize: 28, fontWeight: 700 }}>{value}</div>
-              <div style={{ color: "#7f8998", fontSize: 13, marginTop: 6 }}>{label}</div>
-            </div>
-          ))}
-        </section>
+      <section className="statsBar"><div><b>148</b><span>Companies researched</span></div><div><b>42</b><span>Qualified prospects</span></div><div><b>18</b><span>Decision makers found</span></div><div><b>11</b><span>Outreach drafts ready</span></div><div><b>R2.4m</b><span>Pipeline opportunity</span></div></section>
 
-        <section style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr", gap: 18 }}>
-          <div style={{ border: "1px solid #222a35", borderRadius: 16, overflow: "hidden", background: "#0d1118" }}>
-            <div style={{ padding: 20, borderBottom: "1px solid #222a35" }}>
-              <h2 style={{ margin: 0, fontSize: 20 }}>Qualified opportunity queue</h2>
-              <p style={{ color: "#7f8998", fontSize: 13, marginBottom: 0 }}>Highest-fit prospects surfaced by the research layer.</p>
-            </div>
-            {prospects.map((p) => (
-              <div key={p.company} style={{ padding: 18, borderBottom: "1px solid #1b222c", display: "grid", gridTemplateColumns: "1fr auto", gap: 16 }}>
-                <div>
-                  <strong>{p.company}</strong>
-                  <div style={{ color: "#9da6b5", fontSize: 13, marginTop: 5 }}>{p.segment} · {p.need}</div>
-                  <div style={{ color: "#cbd2dc", fontSize: 12, marginTop: 9 }}>Next: {p.next}</div>
-                </div>
-                <div style={{ textAlign: "right" }}>
-                  <div style={{ fontSize: 22, fontWeight: 700, color: "#35e0b5" }}>{p.score}</div>
-                  <div style={{ color: "#7f8998", fontSize: 11 }}>FIT SCORE</div>
-                </div>
-              </div>
-            ))}
-          </div>
+      <section className="section" id="solutions">
+        <div className="sectionHead"><div><p className="kicker">ONE COMMERCIAL ENGINE</p><h2>Everything you need to <span>find the opportunity.</span></h2></div><p>Stop spending your day searching for customers. Let the acquisition engine do the research and preparation while you focus on your product, service and relationships.</p></div>
+        <div className="solutionGrid"><article><strong>01</strong><h3>AI Market Research</h3><p>Research industries, companies, buying signals and customer segments.</p></article><article><strong>02</strong><h3>Qualified Leads</h3><p>Surface prospects that fit your offer instead of handing you a random list.</p></article><article><strong>03</strong><h3>Decision Makers</h3><p>Organise the people and roles most relevant to the opportunity.</p></article><article><strong>04</strong><h3>Outreach Preparation</h3><p>Create personalised drafts ready for your approval before external contact.</p></article><article><strong>05</strong><h3>Meetings & Follow-up</h3><p>Move opportunities toward meetings, proposals, CRM and revenue.</p></article><article><strong>06</strong><h3>Human Control</h3><p>AI accelerates the work; you remain in control of external actions.</p></article></div>
+      </section>
 
-          <div style={{ border: "1px solid #222a35", borderRadius: 16, padding: 20, background: "#0d1118" }}>
-            <h2 style={{ marginTop: 0, fontSize: 20 }}>Agent workflow</h2>
-            {["Define ICP", "Research companies", "Find decision makers", "Verify contacts", "Generate outreach", "Human approval", "Book meeting", "Follow up", "Convert to CRM"].map((step, i) => (
-              <div key={step} style={{ display: "flex", gap: 12, alignItems: "center", padding: "9px 0", borderBottom: i === 8 ? "none" : "1px solid #1b222c" }}>
-                <span style={{ width: 24, height: 24, borderRadius: 999, background: i < 5 ? "#173a34" : "#1a2029", color: i < 5 ? "#35e0b5" : "#8d97a6", display: "grid", placeItems: "center", fontSize: 11 }}>{i + 1}</span>
-                <span style={{ fontSize: 13 }}>{step}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+      <section className="industrySection" id="industries">
+        <div className="sectionHead"><div><p className="kicker">WHAT WE CAN HELP YOU SELL</p><h2>Your market is bigger than <span>your inbox.</span></h2></div><p>From uniforms and PPE to corporate procurement, sportswear, furniture and training, the engine can be configured around the opportunity you want.</p></div>
+        <div className="industryGrid">{industries.map(([title,sub,img])=><article key={title}><img src={img} alt={title}/><div className="industryOverlay"><h3>{title}</h3><p>{sub}</p><span>Explore opportunity →</span></div></article>)}</div>
+      </section>
 
-        <div style={{ marginTop: 24, padding: 16, borderRadius: 12, background: "#111720", color: "#9da6b5", fontSize: 12, lineHeight: 1.6 }}>
-          Safety boundary: this surface is a product/agent prototype. It does not send unsolicited messages, purchase domains, access private contact data, or make commitments on behalf of a customer without the required permissions and human approval.
-        </div>
-      </div>
+      <section className="workflowSection" id="workflow"><div className="workflowIntro"><p className="kicker">HOW IZAKHONO ONE WORKS</p><h2>From <span>research</span> to revenue.</h2><p>A structured commercial workflow designed to remove repetitive prospecting without removing your judgement.</p></div><div className="workflowSteps">{workflow.map(([num,title,desc])=><article key={num}><span>{num}</span><div><h3>{title}</h3><p>{desc}</p></div></article>)}</div></section>
+
+      <section className="opportunitySection" id="opportunities"><div className="sectionHead"><div><p className="kicker">LIVE PRODUCT SURFACE · PREVIEW DATA</p><h2>Your next customer could already be <span>out there.</span></h2></div><p>These examples show the shape of the opportunity queue. Production data sources, contact verification and outbound integrations are connected only with the appropriate permissions and controls.</p></div><div className="opportunityGrid"><div className="prospectPanel"><div className="panelTitle"><div><b>Qualified opportunity queue</b><small>Highest-fit opportunities surfaced by the research layer.</small></div><span>4 READY</span></div>{prospects.map(p=><article key={p.company}><div className="companyIcon">{p.company.slice(0,1)}</div><div className="prospectMain"><b>{p.company}</b><small>{p.segment} · {p.need}</small><p>Next: {p.next}</p></div><div className="fit"><b>{p.score}</b><small>FIT</small></div></article>)}</div><div className="agentPanel"><div className="panelTitle"><div><b>Agent activity</b><small>Commercial work organised in one view.</small></div><span className="online">● ONLINE</span></div><div className="activity"><i/>Researching target market<span>Completed</span></div><div className="activity"><i/>Finding matching companies<span>Completed</span></div><div className="activity"><i/>Identifying decision makers<span>Completed</span></div><div className="activity active"><i/>Preparing personalised outreach<span>Ready for approval</span></div><div className="approvalBox"><b>Your approval is always required.</b><p>AI prepares the work. You decide what leaves your organisation.</p><a href="#start">Start with your business →</a></div></div></div></section>
+
+      <section className="finalSection"><div className="finalImage"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1200&q=90" alt="Business team working together"/></div><div><p className="kicker">YOUR AI COMMERCIAL TEAM</p><h2>More conversations.<br/><span>More opportunities.</span><br/>Less manual work.</h2><p>IZAKHONO ONE brings research, qualification, outreach preparation, meetings and follow-up into one vibrant commercial workspace.</p><a className="bigCta" href="#opportunities">Find My Customers <b>→</b></a></div></section>
+
+      <div className="safetyBar">🛡️ <b>YOU STAY IN CONTROL.</b> This prototype does not send unsolicited messages, buy domains, access private contact data or make commitments without the required permissions and human approval.</div>
+      <footer><div><b>IZAKHONO <em>ONE</em></b><small>PEOPLE · BUSINESS · OPPORTUNITY · GROWTH</small></div><p>Built in Africa. Ready for the world.</p><a href="#start">Get Started →</a></footer>
+
+      <style>{`
+        .acqSite{--bg:#041019;--panel:#081822;--panel2:#0c2230;--line:#173848;--text:#f7fbff;--muted:#9bb0bb;--cyan:#20d9ff;--green:#29e5aa;--gold:#ffc342;min-height:100vh;background:radial-gradient(circle at 80% 0,#0a4050 0,#041019 35%,#02070b 78%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow:hidden}.acqSite *{box-sizing:border-box}.acqSite a{text-decoration:none;color:inherit}.acqNav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:28px;padding:15px clamp(18px,5vw,70px);background:rgba(2,8,12,.82);border-bottom:1px solid #15303c;backdrop-filter:blur(20px)}.acqBrand{display:flex;align-items:center;gap:11px;margin-right:auto}.acqLogo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:#071116;background:linear-gradient(135deg,var(--gold),var(--cyan));font-size:27px;font-weight:1000;box-shadow:0 0 30px #20d9ff33}.acqBrand b{font-size:18px;letter-spacing:.05em}.acqBrand em,.acqSite h1 span,.acqSite h2 span{color:var(--gold);font-style:normal}.acqBrand small{display:block;color:#7e9aa5;font-size:7px;letter-spacing:.18em;margin-top:3px}.acqNav nav{display:flex;gap:20px;color:#a9bbc3;font-size:12px}.acqNav nav a:hover{color:#fff}.navActions{display:flex;gap:8px}.navGhost{padding:9px 12px;border:1px solid var(--line);border-radius:9px;font-size:11px}.navCta,.bigCta{background:linear-gradient(100deg,var(--cyan),var(--green));color:#031015!important;font-weight:1000;border-radius:10px}.navCta{padding:10px 14px;font-size:11px}.acqHero{max-width:1360px;margin:auto;min-height:680px;padding:75px clamp(20px,5vw,70px);display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center}.heroImage{position:relative;min-height:550px;border-radius:28px;overflow:hidden;border:1px solid #205165;box-shadow:0 40px 100px #000b}.heroImage img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;filter:saturate(1.12) contrast(1.05)}.imageGlow{position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,#041019dd 100%),linear-gradient(90deg,#04101933,#20d9ff22)}.heroBadge{position:absolute;top:22px;left:22px;padding:9px 12px;border:1px solid #31e5bd66;background:#031018d9;border-radius:999px;color:var(--green);font-size:9px;font-weight:900;letter-spacing:.13em}.heroContent{position:relative}.kicker{color:var(--cyan);font-size:10px;font-weight:1000;letter-spacing:.18em;margin:0 0 10px}.heroContent h1{font-size:clamp(48px,6vw,82px);line-height:.94;letter-spacing:-.055em;margin:0 0 24px}.heroLead{font-size:19px;line-height:1.6;color:#b8c8cf;max-width:690px}.heroButtons{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 24px}.bigCta{display:inline-flex;align-items:center;gap:20px;padding:15px 19px;font-size:13px}.bigCta b{font-size:20px}.playCta{display:inline-flex;align-items:center;padding:14px 17px;border:1px solid #2b4b5a;border-radius:10px;background:#07141d;font-weight:900;font-size:12px}.heroProof{display:flex;flex-wrap:wrap;gap:8px}.heroProof span{font-size:10px;color:#a7bbc3;padding:8px 10px;border:1px solid #183544;border-radius:999px;background:#07131b}.statsBar{max-width:1240px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr);border:1px solid #183847;border-radius:18px;background:#06131b;overflow:hidden}.statsBar div{padding:20px;border-right:1px solid #183847}.statsBar div:last-child{border:0}.statsBar b{display:block;font-size:25px;color:#fff}.statsBar span{display:block;color:#78909b;font-size:10px;margin-top:4px}.section,.industrySection,.opportunitySection{max-width:1240px;margin:auto;padding:105px clamp(20px,4vw,30px)}.sectionHead{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:end;margin-bottom:35px}.sectionHead h2,.workflowIntro h2,.finalSection h2{font-size:clamp(37px,5vw,62px);line-height:.98;letter-spacing:-.05em;margin:0}.sectionHead>p,.workflowIntro>p,.finalSection>div>p:not(.kicker){color:var(--muted);line-height:1.65;margin:0}.solutionGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.solutionGrid article{min-height:210px;padding:24px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#0b202c,#06131b);transition:.2s}.solutionGrid article:hover{transform:translateY(-4px);border-color:#2e677b}.solutionGrid strong{color:var(--gold);font-size:10px;letter-spacing:.15em}.solutionGrid h3{font-size:20px;margin:28px 0 8px}.solutionGrid p{color:var(--muted);font-size:13px;line-height:1.6}.industrySection{max-width:none;padding-left:max(20px,calc((100vw - 1240px)/2));padding-right:max(20px,calc((100vw - 1240px)/2));background:linear-gradient(180deg,#06141d,#031018)}.industryGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.industryGrid article{height:260px;position:relative;overflow:hidden;border-radius:18px;border:1px solid #214555}.industryGrid img{width:100%;height:100%;object-fit:cover;transition:.35s;filter:saturate(1.12)}.industryGrid article:hover img{transform:scale(1.06)}.industryOverlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;background:linear-gradient(180deg,transparent 20%,#02080de8 100%)}.industryOverlay h3{font-size:21px;margin:0 0 5px}.industryOverlay p{margin:0;color:#aebfc6;font-size:11px}.industryOverlay span{margin-top:14px;color:var(--cyan);font-size:10px;font-weight:900}.workflowSection{padding:105px max(20px,calc((100vw - 1240px)/2));display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;background:#02090e;border-top:1px solid #12303d;border-bottom:1px solid #12303d}.workflowIntro h2{margin-bottom:18px}.workflowSteps{display:grid;grid-template-columns:1fr 1fr;gap:10px}.workflowSteps article{display:flex;gap:14px;padding:17px;border:1px solid #173543;border-radius:14px;background:#06131b}.workflowSteps article>span{width:32px;height:32px;flex:none;border-radius:10px;display:grid;place-items:center;background:#0b2d3c;color:var(--cyan);font-size:10px;font-weight:1000}.workflowSteps h3{font-size:14px;margin:0 0 5px}.workflowSteps p{color:#7f969f;font-size:11px;line-height:1.5;margin:0}.opportunityGrid{display:grid;grid-template-columns:1.25fr .75fr;gap:14px}.prospectPanel,.agentPanel{border:1px solid #1b3b4a;border-radius:18px;background:#06131b;overflow:hidden}.panelTitle{padding:20px;display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid #183542}.panelTitle b{display:block;font-size:16px}.panelTitle small{display:block;color:#728b95;font-size:10px;margin-top:5px}.panelTitle>span{color:var(--green);font-size:9px;font-weight:1000;letter-spacing:.12em}.prospectPanel article{display:grid;grid-template-columns:38px 1fr auto;gap:12px;align-items:center;padding:16px 20px;border-bottom:1px solid #132c37}.companyIcon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,#14a9c6,#1de0a3);color:#031116;font-weight:1000}.prospectMain b{display:block;font-size:13px}.prospectMain small{display:block;color:#8ea4ad;font-size:10px;margin-top:4px}.prospectMain p{font-size:10px;color:#b8c6cb;margin:7px 0 0}.fit{text-align:right}.fit b{display:block;color:var(--green);font-size:20px}.fit small{color:#617a84;font-size:8px}.agentPanel{padding-bottom:15px}.activity{display:flex;align-items:center;gap:9px;padding:13px 20px;font-size:11px;color:#b4c4ca}.activity i{width:7px;height:7px;border-radius:50%;background:#2d4854}.activity span{margin-left:auto;color:#667f89;font-size:9px}.activity.active i{background:var(--gold);box-shadow:0 0 12px var(--gold)}.activity.active span{color:var(--gold)}.approvalBox{margin:10px 15px 0;padding:15px;border:1px solid #275647;border-radius:13px;background:#071d1a}.approvalBox b{font-size:11px}.approvalBox p{color:#7f999f;font-size:10px;line-height:1.5}.approvalBox a{color:var(--green);font-size:10px;font-weight:900}.finalSection{max-width:1240px;margin:auto;padding:90px 30px 105px;display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;align-items:center}.finalImage{height:430px;overflow:hidden;border-radius:24px;border:1px solid #214858}.finalImage img{width:100%;height:100%;object-fit:cover}.finalSection h2{margin:5px 0 20px}.finalSection>div>p:not(.kicker){max-width:590px;margin-bottom:25px}.safetyBar{max-width:1160px;margin:0 auto 30px;padding:14px 18px;border:1px solid #263d47;border-radius:12px;color:#8ea3aa;background:#061118;font-size:10px;line-height:1.6}.safetyBar b{color:#fff}footer{padding:30px max(20px,calc((100vw - 1160px)/2));border-top:1px solid #132d38;display:flex;align-items:center;gap:25px;background:#02070a;color:#718790}footer div{margin-right:auto}footer div b{display:block;color:#fff;letter-spacing:.06em}footer div em{color:var(--gold);font-style:normal}footer small{display:block;font-size:7px;letter-spacing:.15em;margin-top:3px}footer p{font-size:11px}footer>a{color:var(--cyan);font-size:11px;font-weight:900}@media(max-width:1000px){.acqNav nav{display:none}.acqHero{grid-template-columns:1fr;padding-top:45px}.heroImage{min-height:400px}.statsBar{margin:0 20px;grid-template-columns:repeat(3,1fr)}.statsBar div:nth-child(3){border:0}.sectionHead,.workflowSection,.finalSection{grid-template-columns:1fr}.solutionGrid{grid-template-columns:repeat(2,1fr)}.industryGrid{grid-template-columns:repeat(2,1fr)}.opportunityGrid{grid-template-columns:1fr}.workflowSection{gap:35px}}@media(max-width:620px){.acqNav{padding:12px 15px}.navGhost{display:none}.acqHero{padding:35px 16px}.heroImage{min-height:300px}.heroContent h1{font-size:48px}.heroLead{font-size:16px}.statsBar{grid-template-columns:repeat(2,1fr);margin:0 16px}.statsBar div:nth-child(2){border-right:0}.statsBar div:nth-child(3){border-right:1px solid #183847}.statsBar div:nth-child(5){border-right:0}.section,.industrySection,.opportunitySection{padding:75px 16px}.solutionGrid,.industryGrid,.workflowSteps{grid-template-columns:1fr}.workflowSection{padding:75px 16px}.finalSection{padding:75px 16px}.finalImage{height:300px}.finalSection h2{font-size:43px}.safetyBar{margin:0 16px 20px}footer{flex-direction:column;align-items:flex-start}footer div{margin:0}}
+      `}</style>
     </main>
   );
 }
