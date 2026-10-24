@@ -11,6 +11,15 @@ export interface ValidationTrade {
   closedAt: string;
 }
 
+interface ValidationPosition {
+  side: 'LONG' | 'SHORT';
+  entry: number;
+  stop: number;
+  target: number;
+  units: number;
+  openedAt: string;
+}
+
 export interface ValidationMetrics {
   startingEquity: number;
   endingEquity: number;
@@ -39,17 +48,20 @@ export interface ValidationResult {
 }
 
 function closeTrade(
-  trade: Omit<ValidationTrade, 'exit' | 'pnl' | 'reason' | 'closedAt'>,
+  trade: ValidationPosition,
   exit: number,
   reason: ValidationTrade['reason'],
   closedAt: string,
 ): ValidationTrade {
   const direction = trade.side === 'LONG' ? 1 : -1;
   return {
-    ...trade,
+    side: trade.side,
+    entry: trade.entry,
     exit,
+    units: trade.units,
     pnl: (exit - trade.entry) * trade.units * direction,
     reason,
+    openedAt: trade.openedAt,
     closedAt,
   };
 }
@@ -77,7 +89,7 @@ export function validateStrategy(
   let dailyStartEquity = startingEquity;
   let dailyKillSwitchActive = false;
   let dailyKillSwitchEverTriggered = false;
-  let position: Omit<ValidationTrade, 'exit' | 'pnl' | 'reason' | 'closedAt'> | null = null;
+  let position: ValidationPosition | null = null;
   const trades: ValidationTrade[] = [];
   let currentDay = new Date(candles[0].time * 1000).toISOString().slice(0, 10);
 

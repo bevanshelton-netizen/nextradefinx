@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: base, changeFrequency: "daily", priority: 1 },
     { url: `${base}/markets/live`, changeFrequency: "hourly", priority: 0.9 },
+    { url: `${base}/acquisition`, changeFrequency: "daily", priority: 0.85 },
     { url: `${base}/academy/seasoned-campaigners`, changeFrequency: "weekly", priority: 0.85 },
     ...marketingLocaleCodes.map(locale => ({
       url: `${base}/go/${locale}`,
