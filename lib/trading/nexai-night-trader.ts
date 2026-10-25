@@ -31,7 +31,7 @@ export type Signal = {
   reason: string;
 };
 
-const DEFAULT_CONFIG: BotConfig = {
+export const DEFAULT_CONFIG: BotConfig = {
   startingEquity: 100_000,
   riskPerTradePct: 0.25,
   maxDailyLossPct: 2,

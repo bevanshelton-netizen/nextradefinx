@@ -2,7 +2,7 @@ name: NexAI Launch Gate
 
 on:
   push:
-    branches: [main, build/nexai-global-ui, build/nexai-real-ai]
+    branches: [main, build/izakhono-global-ui, build/nexai-global-ui, build/nexai-real-ai, build/izakhono-invest-mvp]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -50,7 +50,16 @@ jobs:
           }
           EOF
       - name: Package owned release
-        run: tar -czf nextradefinx-owned-release.tar.gz --exclude=.git --exclude=node_modules --exclude=.next .
+        shell: bash
+        run: |
+          tar -czf /tmp/nextradefinx-owned-release.tar.gz \
+            --exclude=.git \
+            --exclude=node_modules \
+            --exclude=.next \
+            --exclude=release \
+            --exclude=nextradefinx-owned-release.tar.gz \
+            .
+          mv /tmp/nextradefinx-owned-release.tar.gz ./nextradefinx-owned-release.tar.gz
       - name: Upload owned release
         uses: actions/upload-artifact@v4
         with:
